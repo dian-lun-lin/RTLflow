@@ -1002,6 +1002,7 @@ extern IData VL_FREAD_I(int width, int array_lsb, int array_size, void* memp, ID
 //}
 __host__ __device__
 extern void VL_WRITEF(const char* formatp, ...);
+__host__ __device__
 extern void VL_FWRITEF(IData fpi, const char* formatp, ...);
 
 extern IData VL_FSCANF_IX(IData fpi, const char* formatp, ...);
@@ -1813,13 +1814,15 @@ __device__ __host__ static inline IData VL_LTES_III(int, int lbits, int, IData l
     return lhs_signed <= rhs_signed;
 }
 
-__device__ __host__ static inline IData VL_LTES_IQQ(int, int lbits, int, QData lhs,
+__device__ __host__ 
+static inline IData VL_LTES_IQQ(int, int lbits, int, QData lhs,
                                                     QData rhs) VL_PURE {
     vlsint64_t lhs_signed = VL_EXTENDS_QQ(64, lbits, lhs);
     vlsint64_t rhs_signed = VL_EXTENDS_QQ(64, lbits, rhs);
     return lhs_signed <= rhs_signed;
 }
 
+__device__ __host__ 
 static inline int _vl_cmps_w(int lbits, WDataInP lwp, WDataInP rwp) VL_MT_SAFE {
     int words = VL_WORDS_I(lbits);
     int i = words - 1;
@@ -1839,6 +1842,7 @@ static inline int _vl_cmps_w(int lbits, WDataInP lwp, WDataInP rwp) VL_MT_SAFE {
 // Math
 
 // Output NOT clean
+__device__ __host__
 static inline WDataOutP VL_NEGATE_W(int words, WDataOutP owp, WDataInP lwp) VL_MT_SAFE {
     EData carry = 1;
     for (int i = 0; i < words; ++i) {
@@ -1866,7 +1870,8 @@ static inline void VL_NEGATE_INPLACE_W(int words, WDataOutP owp_lwp) VL_MT_SAFE 
 #define VL_MODDIV_QQQ(lbits, lhs, rhs) (((rhs) == 0) ? 0 : (lhs) % (rhs))
 #define VL_MODDIV_WWW(lbits, owp, lwp, rwp) (_vl_moddiv_w(lbits, owp, lwp, rwp, 1))
 
-__device__ __host__ static inline WDataOutP VL_ADD_W(int words, WDataOutP owp, WDataInP lwp,
+__device__ __host__ 
+static inline WDataOutP VL_ADD_W(int words, WDataOutP owp, WDataInP lwp,
                                                      WDataInP rwp) VL_MT_SAFE {
     QData carry = 0;
     for (int i = 0; i < words; ++i) {
@@ -1878,7 +1883,7 @@ __device__ __host__ static inline WDataOutP VL_ADD_W(int words, WDataOutP owp, W
     return owp;
 }
 
-//__device__ __host__
+__device__ __host__
 static inline WDataOutP VL_SUB_W(int words, WDataOutP owp, WDataInP lwp, WDataInP rwp) VL_MT_SAFE {
     QData carry = 0;
     for (int i = 0; i < words; ++i) {
@@ -1892,7 +1897,7 @@ static inline WDataOutP VL_SUB_W(int words, WDataOutP owp, WDataInP lwp, WDataIn
     return owp;
 }
 
-//__device__ __host__
+__device__ __host__
 static inline WDataOutP VL_MUL_W(int words, WDataOutP owp, WDataInP lwp, WDataInP rwp) VL_MT_SAFE {
     for (int i = 0; i < words; ++i) owp[i] = 0;
     for (int lword = 0; lword < words; ++lword) {
@@ -1909,20 +1914,23 @@ static inline WDataOutP VL_MUL_W(int words, WDataOutP owp, WDataInP lwp, WDataIn
     return owp;
 }
 
-__device__ __host__ static inline IData VL_MULS_III(int, int lbits, int, IData lhs,
+__device__ __host__ 
+static inline IData VL_MULS_III(int, int lbits, int, IData lhs,
                                                     IData rhs) VL_PURE {
     vlsint32_t lhs_signed = VL_EXTENDS_II(32, lbits, lhs);
     vlsint32_t rhs_signed = VL_EXTENDS_II(32, lbits, rhs);
     return lhs_signed * rhs_signed;
 }
 
-__device__ __host__ static inline QData VL_MULS_QQQ(int, int lbits, int, QData lhs,
+__device__ __host__ 
+static inline QData VL_MULS_QQQ(int, int lbits, int, QData lhs,
                                                     QData rhs) VL_PURE {
     vlsint64_t lhs_signed = VL_EXTENDS_QQ(64, lbits, lhs);
     vlsint64_t rhs_signed = VL_EXTENDS_QQ(64, lbits, rhs);
     return lhs_signed * rhs_signed;
 }
 
+__device__ __host__ 
 static inline WDataOutP VL_MULS_WWW(int, int lbits, int, WDataOutP owp, WDataInP lwp,
                                     WDataInP rwp) VL_MT_SAFE {
     int words = VL_WORDS_I(lbits);

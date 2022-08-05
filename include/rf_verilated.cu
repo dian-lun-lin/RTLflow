@@ -1463,21 +1463,23 @@ void VL_WRITEF(const char* formatp, ...) VL_MT_SAFE {
     //va_end(ap);
 
     //VL_PRINTF_MT("%s", t_output.c_str());
-    printf("%s", formatp);
+    //printf("%s", formatp);
 }
 
 
+// TODO: should we ignore $fwrite
+__host__ __device__
 void VL_FWRITEF(IData fpi, const char* formatp, ...) VL_MT_SAFE {
     // While threadsafe, each thread can only access different file handles
-    static VL_THREAD_LOCAL std::string t_output;  // static only for speed
-    t_output = "";
+    //static VL_THREAD_LOCAL std::string t_output;  // static only for speed
+    //t_output = "";
 
-    va_list ap;
-    va_start(ap, formatp);
-    _vl_vsformat(t_output, formatp, ap);
-    va_end(ap);
+    //va_list ap;
+    //va_start(ap, formatp);
+    //_vl_vsformat(t_output, formatp, ap);
+    //va_end(ap);
 
-    Verilated::threadContextp()->impp()->fdWrite(fpi, t_output);
+    //Verilated::threadContextp()->impp()->fdWrite(fpi, t_output);
 }
 
 IData VL_FSCANF_IX(IData fpi, const char* formatp, ...) VL_MT_SAFE {
