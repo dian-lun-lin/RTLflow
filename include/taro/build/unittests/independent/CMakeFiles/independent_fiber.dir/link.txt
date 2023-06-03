@@ -1,0 +1,1 @@
+/home/dian-lun/gcc-12/bin/c++ -O3 -DNDEBUG CMakeFiles/independent_fiber.dir/independent_fiber_generated_fiber.cu.o -o /home/dian-lun/taro/unittests/independent_fiber  /usr/local/cuda/lib64/libcudart_static.a -ldl /usr/lib/x86_64-linux-gnu/librt.so -lboost_fiber -lboost_context -lcuda -lpthread 

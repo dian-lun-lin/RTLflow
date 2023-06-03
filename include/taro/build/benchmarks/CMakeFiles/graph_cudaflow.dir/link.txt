@@ -1,0 +1,1 @@
+/home/dian-lun/gcc-12/bin/c++ -O3 -DNDEBUG CMakeFiles/graph_cudaflow.dir/graph/main/graph_cudaflow_generated_cudaflow.cu.o -o /home/dian-lun/taro/benchmarks/graph_cudaflow  /usr/local/cuda/lib64/libcudart_static.a -ldl /usr/lib/x86_64-linux-gnu/librt.so -lcuda -lpthread 

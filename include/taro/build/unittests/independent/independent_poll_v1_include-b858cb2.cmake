@@ -1,0 +1,5 @@
+if(EXISTS "/home/dian-lun/taro/build/unittests/independent/independent_poll_v1_tests-b858cb2.cmake")
+  include("/home/dian-lun/taro/build/unittests/independent/independent_poll_v1_tests-b858cb2.cmake")
+else()
+  add_test(independent_poll_v1_NOT_BUILT-b858cb2 independent_poll_v1_NOT_BUILT-b858cb2)
+endif()

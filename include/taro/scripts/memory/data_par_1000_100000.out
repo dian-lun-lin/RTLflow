@@ -1,0 +1,110 @@
+nohup: ignoring input
+start running...
+==========================
+graph: ParallelGraph, graph args: 1000, benchmark: data, data size: 100000 
+
+=== mode: cudaflow
+#threads: 4, #streams: default
+Construction time: 98 ms
+Execution time: 44485 ms
+74.07user 2.84system 0:44.73elapsed 171%CPU (0avgtext+0avgdata 875928maxresident)k
+0inputs+8outputs (0major+2445541minor)pagefaults 0swaps
+Construction time: 98 ms
+Execution time: 44303 ms
+73.76user 2.93system 0:44.56elapsed 172%CPU (0avgtext+0avgdata 885508maxresident)k
+0inputs+8outputs (0major+2426425minor)pagefaults 0swaps
+Construction time: 98 ms
+Execution time: 44420 ms
+73.50user 3.00system 0:44.65elapsed 171%CPU (0avgtext+0avgdata 875480maxresident)k
+0inputs+8outputs (0major+2448059minor)pagefaults 0swaps
+#####################
+=== mode: fiber
+#threads: 4, #streams: increase by algorithm
+Construction time: 98 ms
+Execution time: 240512 ms
+336.74user 453.20system 4:00.69elapsed 328%CPU (0avgtext+0avgdata 595680maxresident)k
+0inputs+8outputs (0major+117787minor)pagefaults 0swaps
+Construction time: 99 ms
+Execution time: 241148 ms
+340.95user 449.52system 4:01.32elapsed 327%CPU (0avgtext+0avgdata 595824maxresident)k
+0inputs+8outputs (0major+117784minor)pagefaults 0swaps
+Construction time: 99 ms
+Execution time: 253942 ms
+350.05user 476.62system 4:14.11elapsed 325%CPU (0avgtext+0avgdata 594348maxresident)k
+0inputs+8outputs (0major+117434minor)pagefaults 0swaps
+#####################
+=== mode: taro_callback_v1
+#threads: 4, #streams: 4
+Construction time: 98 ms
+Execution time: 58003 ms
+118.63user 16.17system 0:58.26elapsed 231%CPU (0avgtext+0avgdata 515988maxresident)k
+0inputs+8outputs (0major+105385minor)pagefaults 0swaps
+Construction time: 98 ms
+Execution time: 58836 ms
+116.91user 16.51system 0:59.08elapsed 225%CPU (0avgtext+0avgdata 516048maxresident)k
+0inputs+8outputs (0major+105386minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 58945 ms
+117.97user 16.04system 0:59.18elapsed 226%CPU (0avgtext+0avgdata 516160maxresident)k
+0inputs+8outputs (0major+105386minor)pagefaults 0swaps
+#####################
+=== mode: taro_callback_v2
+#threads: 4, #streams: increase by algorithm
+Construction time: 98 ms
+Execution time: 59340 ms
+117.46user 16.95system 0:59.58elapsed 225%CPU (0avgtext+0avgdata 516076maxresident)k
+0inputs+8outputs (0major+105383minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 58729 ms
+118.12user 16.55system 0:58.96elapsed 228%CPU (0avgtext+0avgdata 516004maxresident)k
+0inputs+8outputs (0major+105382minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 58963 ms
+118.34user 16.20system 0:59.21elapsed 227%CPU (0avgtext+0avgdata 516176maxresident)k
+0inputs+8outputs (0major+105387minor)pagefaults 0swaps
+#####################
+=== mode: taro_callback_v3
+#threads: 4, #streams: 4
+Construction time: 98 ms
+Execution time: 38179 ms
+58.60user 14.16system 0:38.42elapsed 189%CPU (0avgtext+0avgdata 515960maxresident)k
+0inputs+8outputs (0major+105379minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 38514 ms
+59.38user 14.10system 0:38.75elapsed 189%CPU (0avgtext+0avgdata 515984maxresident)k
+0inputs+8outputs (0major+105378minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 38003 ms
+58.29user 13.71system 0:38.25elapsed 188%CPU (0avgtext+0avgdata 516048maxresident)k
+0inputs+8outputs (0major+105380minor)pagefaults 0swaps
+#####################
+=== mode: taro_poll_v1
+#threads: 4, #streams: 4
+Construction time: 98 ms
+Execution time: 51858 ms
+105.49user 2.71system 0:52.11elapsed 207%CPU (0avgtext+0avgdata 516160maxresident)k
+0inputs+8outputs (0major+105429minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 51618 ms
+105.05user 2.67system 0:51.85elapsed 207%CPU (0avgtext+0avgdata 516120maxresident)k
+0inputs+8outputs (0major+105431minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 51828 ms
+105.23user 2.64system 0:52.07elapsed 207%CPU (0avgtext+0avgdata 516064maxresident)k
+0inputs+8outputs (0major+105429minor)pagefaults 0swaps
+#####################
+=== mode: taro_callback_taskflow
+#threads: 4, #streams: 4
+Construction time: 97 ms
+Execution time: 54691 ms
+120.27user 15.50system 0:54.94elapsed 247%CPU (0avgtext+0avgdata 516648maxresident)k
+0inputs+16outputs (0major+105520minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 54075 ms
+121.77user 13.81system 0:54.32elapsed 249%CPU (0avgtext+0avgdata 516712maxresident)k
+0inputs+8outputs (0major+105518minor)pagefaults 0swaps
+Construction time: 97 ms
+Execution time: 54244 ms
+120.50user 15.46system 0:54.48elapsed 249%CPU (0avgtext+0avgdata 516700maxresident)k
+0inputs+8outputs (0major+105518minor)pagefaults 0swaps
+#####################

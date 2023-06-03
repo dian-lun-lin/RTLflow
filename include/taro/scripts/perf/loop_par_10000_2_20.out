@@ -1,0 +1,383 @@
+nohup: ignoring input
+start running...
+==========================
+graph: ParallelGraph, graph args: 10000, benchmark: loop, CPU overhead: 2, GPU overhead: 20
+
+=== mode: cudaflow
+#threads: 4, #streams: default
+Construction time: 1 ms
+Execution time: 55216 ms
+
+ Performance counter stats for '../../benchmarks/graph_cudaflow -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4':
+
+        220,589.50 msec task-clock                #    3.991 CPUs utilized          
+             1,532      context-switches          #    0.007 K/sec                  
+                23      cpu-migrations            #    0.000 K/sec                  
+             4,510      page-faults               #    0.020 K/sec                  
+   796,489,939,187      cycles                    #    3.611 GHz                    
+ 1,563,715,413,339      instructions              #    1.96  insn per cycle         
+   307,632,541,935      branches                  # 1394.593 M/sec                  
+         3,244,472      branch-misses             #    0.00% of all branches        
+
+      55.267021751 seconds time elapsed
+
+     220.483136000 seconds user
+       0.111999000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 54710 ms
+
+ Performance counter stats for '../../benchmarks/graph_cudaflow -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4':
+
+        218,594.20 msec task-clock                #    3.992 CPUs utilized          
+             1,858      context-switches          #    0.008 K/sec                  
+                12      cpu-migrations            #    0.000 K/sec                  
+             4,481      page-faults               #    0.020 K/sec                  
+   789,283,811,523      cycles                    #    3.611 GHz                    
+ 1,495,300,424,583      instructions              #    1.89  insn per cycle         
+   294,216,322,831      branches                  # 1345.948 M/sec                  
+         3,303,193      branch-misses             #    0.00% of all branches        
+
+      54.764768544 seconds time elapsed
+
+     218.467553000 seconds user
+       0.131999000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 55198 ms
+
+ Performance counter stats for '../../benchmarks/graph_cudaflow -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4':
+
+        220,520.34 msec task-clock                #    3.991 CPUs utilized          
+             1,717      context-switches          #    0.008 K/sec                  
+                13      cpu-migrations            #    0.000 K/sec                  
+             4,486      page-faults               #    0.020 K/sec                  
+   796,240,053,027      cycles                    #    3.611 GHz                    
+ 1,512,124,545,440      instructions              #    1.90  insn per cycle         
+   297,516,426,666      branches                  # 1349.156 M/sec                  
+         3,153,036      branch-misses             #    0.00% of all branches        
+
+      55.252001659 seconds time elapsed
+
+     220.409519000 seconds user
+       0.116015000 seconds sys
+
+
+#####################
+=== mode: fiber
+#threads: 4, #streams: increase by algorithm
+Construction time: 0 ms
+Execution time: 25276 ms
+
+ Performance counter stats for '../../benchmarks/graph_fiber -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4':
+
+         42,212.93 msec task-clock                #    1.666 CPUs utilized          
+            33,967      context-switches          #    0.805 K/sec                  
+               152      cpu-migrations            #    0.004 K/sec                  
+            64,859      page-faults               #    0.002 M/sec                  
+   152,303,389,626      cycles                    #    3.608 GHz                    
+   273,364,108,437      instructions              #    1.79  insn per cycle         
+    54,649,188,834      branches                  # 1294.608 M/sec                  
+        21,678,366      branch-misses             #    0.04% of all branches        
+
+      25.345381372 seconds time elapsed
+
+      42.518000000 seconds user
+       0.480982000 seconds sys
+
+
+Construction time: 0 ms
+Execution time: 25244 ms
+
+ Performance counter stats for '../../benchmarks/graph_fiber -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4':
+
+         42,061.54 msec task-clock                #    1.662 CPUs utilized          
+            34,528      context-switches          #    0.821 K/sec                  
+               182      cpu-migrations            #    0.004 K/sec                  
+            64,640      page-faults               #    0.002 M/sec                  
+   151,755,436,863      cycles                    #    3.608 GHz                    
+   269,211,296,627      instructions              #    1.77  insn per cycle         
+    53,835,438,137      branches                  # 1279.921 M/sec                  
+        20,519,150      branch-misses             #    0.04% of all branches        
+
+      25.312577170 seconds time elapsed
+
+      42.407572000 seconds user
+       0.457532000 seconds sys
+
+
+Construction time: 0 ms
+Execution time: 25262 ms
+
+ Performance counter stats for '../../benchmarks/graph_fiber -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4':
+
+         42,114.88 msec task-clock                #    1.662 CPUs utilized          
+            32,216      context-switches          #    0.765 K/sec                  
+               162      cpu-migrations            #    0.004 K/sec                  
+            64,667      page-faults               #    0.002 M/sec                  
+   151,953,517,962      cycles                    #    3.608 GHz                    
+   268,068,692,393      instructions              #    1.76  insn per cycle         
+    53,607,474,266      branches                  # 1272.887 M/sec                  
+        20,772,412      branch-misses             #    0.04% of all branches        
+
+      25.335044912 seconds time elapsed
+
+      42.312457000 seconds user
+       0.582412000 seconds sys
+
+
+#####################
+=== mode: taro_callback_v1
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 50030 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_v1 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,404.93 msec task-clock                #    0.407 CPUs utilized          
+            18,040      context-switches          #    0.884 K/sec                  
+               175      cpu-migrations            #    0.009 K/sec                  
+             4,047      page-faults               #    0.198 K/sec                  
+    73,607,474,623      cycles                    #    3.607 GHz                    
+   133,199,393,030      instructions              #    1.81  insn per cycle         
+    27,058,652,970      branches                  # 1326.084 M/sec                  
+        12,009,793      branch-misses             #    0.04% of all branches        
+
+      50.187364433 seconds time elapsed
+
+      20.720144000 seconds user
+       0.303049000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 50047 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_v1 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,395.36 msec task-clock                #    0.407 CPUs utilized          
+            18,007      context-switches          #    0.883 K/sec                  
+               196      cpu-migrations            #    0.010 K/sec                  
+             4,045      page-faults               #    0.198 K/sec                  
+    73,572,690,503      cycles                    #    3.607 GHz                    
+   133,043,597,564      instructions              #    1.81  insn per cycle         
+    27,025,765,229      branches                  # 1325.094 M/sec                  
+        12,218,549      branch-misses             #    0.05% of all branches        
+
+      50.170488895 seconds time elapsed
+
+      20.690894000 seconds user
+       0.318588000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 50047 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_v1 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,394.09 msec task-clock                #    0.406 CPUs utilized          
+            17,969      context-switches          #    0.881 K/sec                  
+               141      cpu-migrations            #    0.007 K/sec                  
+             4,044      page-faults               #    0.198 K/sec                  
+    73,568,734,647      cycles                    #    3.607 GHz                    
+   133,048,448,234      instructions              #    1.81  insn per cycle         
+    27,027,217,561      branches                  # 1325.247 M/sec                  
+        12,227,590      branch-misses             #    0.05% of all branches        
+
+      50.181367870 seconds time elapsed
+
+      20.721261000 seconds user
+       0.286781000 seconds sys
+
+
+#####################
+=== mode: taro_callback_v3
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 50032 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_v3 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,395.51 msec task-clock                #    0.406 CPUs utilized          
+            18,021      context-switches          #    0.884 K/sec                  
+               216      cpu-migrations            #    0.011 K/sec                  
+             4,043      page-faults               #    0.198 K/sec                  
+    73,574,911,087      cycles                    #    3.607 GHz                    
+   131,335,220,105      instructions              #    1.79  insn per cycle         
+    26,680,590,988      branches                  # 1308.160 M/sec                  
+        12,207,897      branch-misses             #    0.05% of all branches        
+
+      50.173912267 seconds time elapsed
+
+      20.718784000 seconds user
+       0.290391000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 50038 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_v3 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,389.69 msec task-clock                #    0.406 CPUs utilized          
+            18,000      context-switches          #    0.883 K/sec                  
+               183      cpu-migrations            #    0.009 K/sec                  
+             4,037      page-faults               #    0.198 K/sec                  
+    73,553,531,008      cycles                    #    3.607 GHz                    
+   131,666,030,462      instructions              #    1.79  insn per cycle         
+    26,747,731,937      branches                  # 1311.826 M/sec                  
+        12,277,124      branch-misses             #    0.05% of all branches        
+
+      50.177537170 seconds time elapsed
+
+      20.731195000 seconds user
+       0.278014000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 50043 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_v3 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,391.09 msec task-clock                #    0.406 CPUs utilized          
+            18,073      context-switches          #    0.886 K/sec                  
+               131      cpu-migrations            #    0.006 K/sec                  
+             4,040      page-faults               #    0.198 K/sec                  
+    73,557,915,695      cycles                    #    3.607 GHz                    
+   131,722,006,531      instructions              #    1.79  insn per cycle         
+    26,758,791,263      branches                  # 1312.278 M/sec                  
+        12,195,383      branch-misses             #    0.05% of all branches        
+
+      50.193577356 seconds time elapsed
+
+      20.706689000 seconds user
+       0.302244000 seconds sys
+
+
+#####################
+=== mode: taro_poll_v1
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 49631 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_poll_v1 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+        190,553.15 msec task-clock                #    3.830 CPUs utilized          
+         2,520,853      context-switches          #    0.013 M/sec                  
+                26      cpu-migrations            #    0.000 K/sec                  
+             4,383      page-faults               #    0.023 K/sec                  
+   681,569,542,805      cycles                    #    3.577 GHz                    
+   699,149,534,258      instructions              #    1.03  insn per cycle         
+   141,674,640,989      branches                  #  743.491 M/sec                  
+       409,868,571      branch-misses             #    0.29% of all branches        
+
+      49.754372637 seconds time elapsed
+
+     162.756335000 seconds user
+      30.797312000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 49637 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_poll_v1 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+        189,822.72 msec task-clock                #    3.814 CPUs utilized          
+         2,740,088      context-switches          #    0.014 M/sec                  
+                19      cpu-migrations            #    0.000 K/sec                  
+             4,385      page-faults               #    0.023 K/sec                  
+   678,272,637,118      cycles                    #    3.573 GHz                    
+   682,401,770,533      instructions              #    1.01  insn per cycle         
+   138,186,824,070      branches                  #  727.978 M/sec                  
+       433,378,822      branch-misses             #    0.31% of all branches        
+
+      49.773536043 seconds time elapsed
+
+     160.207758000 seconds user
+      32.874651000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 49627 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_poll_v1 -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+        182,764.77 msec task-clock                #    3.673 CPUs utilized          
+         4,974,720      context-switches          #    0.027 M/sec                  
+                26      cpu-migrations            #    0.000 K/sec                  
+             4,385      page-faults               #    0.024 K/sec                  
+   647,340,259,082      cycles                    #    3.542 GHz                    
+   684,342,350,766      instructions              #    1.06  insn per cycle         
+   138,395,204,883      branches                  #  757.231 M/sec                  
+       533,782,208      branch-misses             #    0.39% of all branches        
+
+      49.762463443 seconds time elapsed
+
+     138.933034000 seconds user
+      49.767361000 seconds sys
+
+
+#####################
+=== mode: taro_callback_taskflow
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 100025 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_taskflow -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,554.58 msec task-clock                #    0.205 CPUs utilized          
+            31,436      context-switches          #    0.002 M/sec                  
+               780      cpu-migrations            #    0.038 K/sec                  
+             4,622      page-faults               #    0.225 K/sec                  
+    74,097,353,903      cycles                    #    3.605 GHz                    
+   133,060,234,999      instructions              #    1.80  insn per cycle         
+    27,032,519,550      branches                  # 1315.158 M/sec                  
+        17,185,154      branch-misses             #    0.06% of all branches        
+
+     100.165461386 seconds time elapsed
+
+      21.256293000 seconds user
+       0.344458000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 101018 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_taskflow -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,544.14 msec task-clock                #    0.203 CPUs utilized          
+            30,976      context-switches          #    0.002 M/sec                  
+               525      cpu-migrations            #    0.026 K/sec                  
+             4,762      page-faults               #    0.232 K/sec                  
+    74,063,193,468      cycles                    #    3.605 GHz                    
+   133,425,080,210      instructions              #    1.80  insn per cycle         
+    27,104,710,121      branches                  # 1319.340 M/sec                  
+        17,095,120      branch-misses             #    0.06% of all branches        
+
+     101.154901216 seconds time elapsed
+
+      21.238429000 seconds user
+       0.346301000 seconds sys
+
+
+Construction time: 1 ms
+Execution time: 100998 ms
+
+ Performance counter stats for '../../benchmarks/graph_taro_callback_taskflow -g ParallelGraph --graph_args 10000 -b loop --benchmark_args 2 20 -t 4 -s 4':
+
+         20,549.98 msec task-clock                #    0.203 CPUs utilized          
+            31,592      context-switches          #    0.002 M/sec                  
+               411      cpu-migrations            #    0.020 K/sec                  
+             4,763      page-faults               #    0.232 K/sec                  
+    74,081,051,794      cycles                    #    3.605 GHz                    
+   132,949,657,709      instructions              #    1.79  insn per cycle         
+    27,008,566,327      branches                  # 1314.287 M/sec                  
+        17,253,589      branch-misses             #    0.06% of all branches        
+
+     101.126116200 seconds time elapsed
+
+      21.241799000 seconds user
+       0.346218000 seconds sys
+
+
+#####################

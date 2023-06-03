@@ -1,0 +1,59 @@
+nohup: ignoring input
+start running...
+==========================
+graph: ParallelGraph, graph args: 10000, benchmark: loop, CPU overhead: 2, GPU overhead: 20
+
+=== mode: cudaflow
+#threads: 4, #streams: default
+Construction time: 1 ms
+Execution time: 55159 ms
+Construction time: 1 ms
+Execution time: 55185 ms
+Construction time: 1 ms
+Execution time: 55201 ms
+#####################
+=== mode: fiber
+#threads: 4, #streams: increase by algorithm
+Construction time: 0 ms
+Execution time: 25264 ms
+Construction time: 0 ms
+Execution time: 25274 ms
+Construction time: 0 ms
+Execution time: 25272 ms
+#####################
+=== mode: taro_callback_v1
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 50017 ms
+Construction time: 1 ms
+Execution time: 50018 ms
+Construction time: 1 ms
+Execution time: 50010 ms
+#####################
+=== mode: taro_callback_v3
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 50013 ms
+Construction time: 1 ms
+Execution time: 50014 ms
+Construction time: 1 ms
+Execution time: 50014 ms
+#####################
+=== mode: taro_poll_v1
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 49622 ms
+Construction time: 1 ms
+Execution time: 49624 ms
+Construction time: 1 ms
+Execution time: 49626 ms
+#####################
+=== mode: taro_callback_taskflow
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 100945 ms
+Construction time: 1 ms
+Execution time: 100934 ms
+Construction time: 1 ms
+Execution time: 100893 ms
+#####################

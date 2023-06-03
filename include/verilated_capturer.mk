@@ -22,7 +22,7 @@ CFG_WITH_CCWARN = no
 CFG_WITH_LONGTESTS = no
 
 # Select newest language
-CFG_CXXFLAGS_STD_NEWEST = -std=c++17
+CFG_CXXFLAGS_STD_NEWEST = -std=c++20
 # Select oldest language (for Verilator internal testing only)
 CFG_CXXFLAGS_STD_OLDEST = -std=c++03
 # Compiler flags to use to turn off unused and generated code warnings, such as -Wno-div-by-zero

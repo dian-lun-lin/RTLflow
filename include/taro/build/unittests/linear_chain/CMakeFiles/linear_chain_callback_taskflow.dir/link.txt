@@ -1,0 +1,1 @@
+/home/dian-lun/gcc-12/bin/c++ -O3 -DNDEBUG CMakeFiles/linear_chain_callback_taskflow.dir/linear_chain_callback_taskflow_generated_callback_taskflow.cu.o -o /home/dian-lun/taro/unittests/linear_chain_callback_taskflow  /usr/local/cuda/lib64/libcudart_static.a -ldl /usr/lib/x86_64-linux-gnu/librt.so -lcuda -lpthread 

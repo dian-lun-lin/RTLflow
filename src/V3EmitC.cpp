@@ -5356,9 +5356,9 @@ void V3EmitC::emitRTLflowInt(size_t cuda_cmem_size, size_t cuda_smem_size, size_
 
     V3OutCFile of(filename);
     of.putsGuard();
-    of.puts("\n#include <taskflow.hpp>\n");
     of.puts("\n#include <rf_heavy.h>\n");
     of.puts("\n#include <cuda/cudaflow.hpp>\n");
+    of.puts("\n#include <taro/src/cuda/callback/v4/taro_callback_v4.hpp>\n");
     of.puts("#include \"" + topClassName + "__Syms.h\"\n");
     for (AstNodeModule* nodep = v3Global.rootp()->modulesp(); nodep;
          nodep = VN_CAST(nodep->nextp(), NodeModule)) {
@@ -5379,9 +5379,8 @@ void V3EmitC::emitRTLflowInt(size_t cuda_cmem_size, size_t cuda_smem_size, size_
     of.puts("class RTLflow {\n\n");
     of.puts("friend class " + topClassName + ";\n");
     of.putsPrivate(true);
-    of.puts("tf::Taskflow _taskflow;\n");
     of.puts("tf::cudaFlow _cudaflow;\n");
-    of.puts("tf::Executor _executor{1};\n");
+    of.puts("taro::TaroCBV4& _taro;\n");
     of.puts("size_t cuda_cmem_size{" + cvtToStr(cuda_cmem_size) + "};\n");
     of.puts("size_t cuda_smem_size{" + cvtToStr(cuda_smem_size) + "};\n");
     of.puts("size_t cuda_imem_size{" + cvtToStr(cuda_imem_size) + "};\n");
@@ -5402,17 +5401,17 @@ void V3EmitC::emitRTLflowInt(size_t cuda_cmem_size, size_t cuda_smem_size, size_
     of.puts(topClassName + "* _dut{nullptr};\n");
     of.puts("bool*  done{nullptr};\n");
     // of.puts("IData* done{nullptr};\n");
-    of.puts("RTLflow(" + topClassName+ "* dut);\n");
+    of.puts("RTLflow(" + topClassName+ "* dut, taro::TaroCBV4& taro);\n");
     of.puts("RTLflow(const RTLflow&);\n");
     of.puts("~RTLflow();\n");
     of.puts("void initialize();\n");
     of.puts("void run();\n");
-    of.puts("tf::Taskflow& taskflow();\n");
     of.puts("CData* get(CDataLoc cdl, size_t idx);\n");
     of.puts("SData* get(SDataLoc sdl, size_t idx);\n");
     of.puts("QData* get(QDataLoc qdl, size_t idx);\n");
     of.puts("IData* get(IDataLoc idl, size_t idx);\n");
     //of.puts("void update(size_t idx);\n");
+    of.puts("taro::TaskHandle create_sim_t();\n");
     of.puts("};\n\n");
 
     of.puts("} // end of namespace RF ========================================\n");
@@ -5436,7 +5435,6 @@ void V3EmitC::emitRTLflowImp() {
     v3Global.rootp()->addFilesp(cfilep);
 
     V3OutCFile of(filename);
-    of.puts("\n#include <taskflow.hpp>\n");
     of.puts("\n#include <cuda/algorithm/reduce.hpp>\n");
     of.puts("\n#include \"rtlflow.h\"\n\n");
     of.puts("\n#include \"" + topClassName + ".h\"\n\n");
@@ -5456,7 +5454,7 @@ void V3EmitC::emitRTLflowImp() {
             + "__Syms* __restrict vlSymsp, CData* _csignals, SData* _ssignals, IData* _isignals, "
               "QData* _qsignals);\n\n");
 
-    of.puts("RTLflow::RTLflow(" + topClassName+ "* dut): dut{dut} {\n");
+    of.puts("RTLflow::RTLflow(" + topClassName+ "* dut, taro::TaroCBV4& taro): dut{dut}, _taro{taro} {\n");
     of.puts("checkCuda(cudaMallocManaged(&_csignals, BATCH_SIZE * cuda_cmem_size * "
             "sizeof(CData)));\n");
     of.puts("checkCuda(cudaMallocManaged(&_ssignals, BATCH_SIZE * cuda_smem_size * "
@@ -5477,8 +5475,7 @@ void V3EmitC::emitRTLflowImp() {
     //}
     //of.puts("block_dims.resize(" + cvtToStr(num_partitions + 3) + ", 128);\n");
     of.puts("}\n");
-    of.puts("RTLflow::RTLflow(const RTLflow& rtlflow) {\n");
-    of.puts("dut = rtlflow.dut;\n");
+    of.puts("RTLflow::RTLflow(const RTLflow& rtlflow): dut{rtlflow.dut}, _taro{rtlflow._taro} {\n");
     of.puts("checkCuda(cudaMallocManaged(&_csignals, BATCH_SIZE * cuda_cmem_size * "
             "sizeof(CData)));\n");
     of.puts("checkCuda(cudaMallocManaged(&_ssignals, BATCH_SIZE * cuda_smem_size * "
@@ -5528,8 +5525,6 @@ void V3EmitC::emitRTLflowImp() {
     of.puts("curandGenerate(generator, (unsigned int*)_qsignals, BATCH_SIZE * cuda_qmem_size * 2);\n");
     of.puts("}\n\n");
 
-    of.puts("void RTLflow::run() { _executor.run(_taskflow).wait(); }\n\n");
-    of.puts("tf::Taskflow& RTLflow::taskflow() { return _taskflow; }\n\n");
 
     // ctor reset
     {
@@ -5625,8 +5620,14 @@ void V3EmitC::emitRTLflowImp() {
           of.puts("reset_cut.precede(id_" + cvtToStr(mtp->id()) + "_cut);\n");
         }
     }
+    of.puts("}\n");
 
-    of.puts("auto start_t = _taskflow.emplace([=](){\n");
+
+    of.puts("taro::TaskHandle RTLflow::create_sim_t() {\n");
+    of.puts(topClassName + "__Syms* VlSymsp = dut-> __VlSymsp;\n");
+    of.puts("const size_t num_threads = (BATCH_SIZE < 128) ? BATCH_SIZE : 128;\n");
+    of.puts("const size_t num_blocks = (num_threads < 128) ? 1 : BATCH_SIZE / num_threads;\n");
+    of.puts("return _taro.emplace([=, this]() -> taro::Coro {\n");
     of.puts("if(VL_UNLIKELY(!init)) {\n");
     of.puts(v3Global.opt.prefix()
             + "::_eval_initial(VlSymsp, _csignals, _ssignals, _isignals, _qsignals);\n");
@@ -5646,61 +5647,41 @@ void V3EmitC::emitRTLflowImp() {
             "device));\n");
     of.puts("checkCuda(cudaMemPrefetchAsync(change, BATCH_SIZE * sizeof(IData), device));\n");
     of.puts("checkCuda(cudaMemPrefetchAsync(done, BATCH_SIZE * sizeof(bool), device));\n");
+    of.puts("co_await _taro.cuda_suspend([=](cudaStream_t s) {\n");
+    of.puts("_eval_settle<<<num_blocks, num_threads, 0, s>>>(VlSymsp, _csignals, _ssignals, _isignals, _qsignals);\n");
+    of.puts("});\n");
     of.puts("init = true;\n");
-    of.puts("return 0;\n");
     of.puts("}\n");
-    of.puts("else {\n");
-    of.puts("return 1;\n");
-    of.puts("}\n");
-    of.puts("});\n\n");
+    of.puts("co_await _taro.cuda_suspend([this](cudaStream_t s) {\n");
+    of.puts("auto graph = _cudaflow.native_executable();\n");
+    of.puts("cudaGraphLaunch(graph, s);\n");
+    of.puts("});\n");
 
-    of.puts("auto init_detect_t = _taskflow.emplace([=](){\n");
+    of.puts("while(1) {\n");
+
     of.puts("if(++loop > 100) {\n");
-    of.puts("_change_request<<<num_blocks, num_threads, 0>>>(VlSymsp, "
-            "_csignals, _ssignals, _isignals, _qsignals, change);\n");
-    of.puts("checkCuda(cudaDeviceSynchronize());\n");
+    of.puts("co_await _taro.cuda_suspend([=](cudaStream_t s) {\n");
+    of.puts("_change_request<<<num_blocks, num_threads, 0>>>(VlSymsp, _csignals, _ssignals, _isignals, _qsignals, change);\n");
+    of.puts("});\n");
     of.puts("VL_FATAL_MT(\"add.v\", 2, \"\",\n");
     of.puts("\"Verilated model didn't converge\"\n");
     of.puts("\"- See https://verilator.org/warn/DIDNOTCONVERGE\");\n");
-    of.puts("}\n");
-    of.puts("return (bool)change[0];\n");
-    of.puts("});\n");
+    of.puts("}\n"); 
 
-    of.puts("auto init_sim_t = _taskflow.emplace([=](){\n");
-    of.puts(
-        "_eval_settle<<<num_blocks, num_threads, 0>>>(VlSymsp, _csignals, "
-        "_ssignals, _isignals, _qsignals);\n");
-    of.puts("checkCuda(cudaDeviceSynchronize());\n");
-    of.puts("_cudaflow.offload();\n");
-    of.puts("});\n");
+    of.puts("if(!((bool)change[0])) {\n");
+    of.puts("break;\n");
+    of.puts("}\n"); 
 
-    of.puts("auto sim_t = _taskflow.emplace([=](){\n");
-    of.puts("_cudaflow.offload();\n");
+    of.puts("co_await _taro.cuda_suspend([this](cudaStream_t s) {\n");
+    of.puts("auto graph = _cudaflow.native_executable();\n");
+    of.puts("cudaGraphLaunch(graph, s);\n");
     of.puts("});\n");
-    of.puts("auto end_t = _taskflow.emplace([=](){\n");
+    of.puts("}");
+
     of.puts("loop = 0;\n");
-    //of.puts("checkCuda(cudaMemset(change, 1, sizeof(IData) * BATCH_SIZE_h));\n");
     of.puts("});\n\n");
-    of.puts("auto detect_t = _taskflow.emplace([=](){\n");
-    of.puts("if(++loop > 100) {\n");
-    of.puts("_change_request<<<num_blocks, num_threads, 0>>>(VlSymsp, "
-            "_csignals, _ssignals, _isignals, _qsignals, change);\n");
-    of.puts("checkCuda(cudaDeviceSynchronize());\n");
-    of.puts("VL_FATAL_MT(\"add.v\", 2, \"\",\n");
-    of.puts("\"Verilated model didn't converge\"\n");
-    of.puts("\"- See https://verilator.org/warn/DIDNOTCONVERGE\");\n");
-    of.puts("}\n");
-    of.puts("return (bool)change[0];\n");
-    of.puts("});\n");
-    of.puts("start_t.precede(init_sim_t, sim_t);\n");
-    of.puts("init_sim_t.precede(init_detect_t);\n");
-    of.puts("init_detect_t.precede(end_t, init_sim_t);\n\n");
-    of.puts("sim_t.precede(detect_t);\n");
-    of.puts("detect_t.precede(end_t, sim_t);\n");
-    of.puts("std::ofstream ofs(\"./cudaflow.out\");\n");
-    of.puts("_cudaflow.dump(ofs);\n");
+    of.puts("}\n\n");
 
-    of.puts("}\n");
     of.puts("} // end of namespace RF ==================================== \n");
 }
 

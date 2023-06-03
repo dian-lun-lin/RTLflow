@@ -10,11 +10,11 @@
 ######################################################################
 
 PERL = /usr/bin/perl
-PYTHON3 = /usr/bin/python3
+PYTHON3 = /home/dian-lun/miniconda3/bin/python3
 NVCC = nvcc 
 LINK = $(NVCC) -arch=sm_75 -lpthread  -lgomp -lcurand
 
-RTLFLOW_FLAGS = -std=c++17 -arch=sm_75 --extended-lambda -I $(VERILATOR_ROOT)/include/taskflow -Xcompiler -fopenmp
+RTLFLOW_FLAGS = -std=c++20 -arch=sm_75 --extended-lambda -I $(VERILATOR_ROOT)/include/taskflow -I $(VERILATOR_ROOT)/include/taro -Xcompiler -fopenmp
 
 # for convience
 CXX = $(NVCC)

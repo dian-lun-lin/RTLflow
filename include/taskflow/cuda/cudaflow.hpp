@@ -113,6 +113,19 @@ class cudaFlow {
     */
     void dump_native_graph(std::ostream& os) const;
 
+    cudaGraphExec_t native_executable() { 
+      if(_executable == nullptr) {
+        TF_CHECK_CUDA(
+          cudaGraphInstantiate(
+            &_executable, _graph._native_handle, nullptr, nullptr, 0
+          ),
+          "failed to create an executable graph"
+        );
+        //cuda_dump_graph(std::cout, cf._graph._native_handle);
+      }
+      return _executable; 
+    };
+
     // ------------------------------------------------------------------------
     // Graph building routines
     // ------------------------------------------------------------------------

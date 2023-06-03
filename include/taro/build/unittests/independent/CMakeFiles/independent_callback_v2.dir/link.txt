@@ -1,0 +1,1 @@
+/home/dian-lun/gcc-12/bin/c++ -O3 -DNDEBUG CMakeFiles/independent_callback_v2.dir/independent_callback_v2_generated_callback_v2.cu.o -o /home/dian-lun/taro/unittests/independent_callback_v2  /usr/local/cuda/lib64/libcudart_static.a -ldl /usr/lib/x86_64-linux-gnu/librt.so -lcuda -lpthread 

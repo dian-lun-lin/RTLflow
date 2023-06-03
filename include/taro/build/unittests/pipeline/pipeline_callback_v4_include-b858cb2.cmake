@@ -1,0 +1,5 @@
+if(EXISTS "/home/dian-lun/taro/build/unittests/pipeline/pipeline_callback_v4_tests-b858cb2.cmake")
+  include("/home/dian-lun/taro/build/unittests/pipeline/pipeline_callback_v4_tests-b858cb2.cmake")
+else()
+  add_test(pipeline_callback_v4_NOT_BUILT-b858cb2 pipeline_callback_v4_NOT_BUILT-b858cb2)
+endif()

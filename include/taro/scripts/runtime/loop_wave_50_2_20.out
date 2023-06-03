@@ -1,0 +1,59 @@
+nohup: ignoring input
+start running...
+==========================
+graph: Wavefront, graph args: 50, benchmark: loop, CPU overhead: 2, GPU overhead: 20
+
+=== mode: cudaflow
+#threads: 4, #streams: default
+Construction time: 0 ms
+Execution time: 14421 ms
+Construction time: 0 ms
+Execution time: 13986 ms
+Construction time: 0 ms
+Execution time: 14211 ms
+#####################
+=== mode: fiber
+#threads: 4, #streams: 4
+Construction time: 0 ms
+Execution time: 50196 ms
+Construction time: 0 ms
+Execution time: 50287 ms
+Construction time: 0 ms
+Execution time: 50189 ms
+#####################
+=== mode: taro_callback_v1
+#threads: 4, #streams: 4
+Construction time: 0 ms
+Execution time: 12713 ms
+Construction time: 0 ms
+Execution time: 12701 ms
+Construction time: 0 ms
+Execution time: 12697 ms
+#####################
+=== mode: taro_callback_v3
+#threads: 4, #streams: 4
+Construction time: 0 ms
+Execution time: 12692 ms
+Construction time: 0 ms
+Execution time: 12697 ms
+Construction time: 0 ms
+Execution time: 12696 ms
+#####################
+=== mode: taro_poll_v1
+#threads: 4, #streams: 4
+Construction time: 0 ms
+Execution time: 12597 ms
+Construction time: 0 ms
+Execution time: 12635 ms
+Construction time: 0 ms
+Execution time: 12606 ms
+#####################
+=== mode: taro_callback_taskflow
+#threads: 4, #streams: 4
+Construction time: 0 ms
+Execution time: 25241 ms
+Construction time: 0 ms
+Execution time: 25235 ms
+Construction time: 0 ms
+Execution time: 25247 ms
+#####################

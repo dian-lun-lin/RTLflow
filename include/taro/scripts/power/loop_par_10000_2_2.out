@@ -1,0 +1,185 @@
+nohup: ignoring input
+start running...
+==========================
+graph: ParallelGraph, graph args: 10000, benchmark: loop, CPU overhead: 2, GPU overhead: 2
+
+=== mode: cudaflow
+#threads: 4, #streams: default
+Construction time: 1 ms
+Execution time: 10170 ms
+
+ Performance counter stats for 'system wide':
+
+            259.07 Joules power/energy-cores/                                         
+
+      10.242110732 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 10161 ms
+
+ Performance counter stats for 'system wide':
+
+            259.41 Joules power/energy-cores/                                         
+
+      10.221773928 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 10160 ms
+
+ Performance counter stats for 'system wide':
+
+            259.57 Joules power/energy-cores/                                         
+
+      10.210186553 seconds time elapsed
+
+#####################
+=== mode: fiber
+#threads: 4, #streams: increase by algorithm
+Construction time: 0 ms
+Execution time: 5204 ms
+
+ Performance counter stats for 'system wide':
+
+            139.93 Joules power/energy-cores/                                         
+
+       5.274862820 seconds time elapsed
+
+Construction time: 0 ms
+Execution time: 5209 ms
+
+ Performance counter stats for 'system wide':
+
+            140.35 Joules power/energy-cores/                                         
+
+       5.291658855 seconds time elapsed
+
+Construction time: 0 ms
+Execution time: 5212 ms
+
+ Performance counter stats for 'system wide':
+
+            140.70 Joules power/energy-cores/                                         
+
+       5.296750599 seconds time elapsed
+
+#####################
+=== mode: taro_callback_v1
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 5296 ms
+
+ Performance counter stats for 'system wide':
+
+            135.57 Joules power/energy-cores/                                         
+
+       5.433102692 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 5260 ms
+
+ Performance counter stats for 'system wide':
+
+            134.93 Joules power/energy-cores/                                         
+
+       5.394828524 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 5259 ms
+
+ Performance counter stats for 'system wide':
+
+            135.11 Joules power/energy-cores/                                         
+
+       5.398025623 seconds time elapsed
+
+#####################
+=== mode: taro_callback_v3
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 5233 ms
+
+ Performance counter stats for 'system wide':
+
+            135.74 Joules power/energy-cores/                                         
+
+       5.362087704 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 5255 ms
+
+ Performance counter stats for 'system wide':
+
+            134.70 Joules power/energy-cores/                                         
+
+       5.402777357 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 5256 ms
+
+ Performance counter stats for 'system wide':
+
+            135.87 Joules power/energy-cores/                                         
+
+       5.379152265 seconds time elapsed
+
+#####################
+=== mode: taro_poll_v1
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 7500 ms
+
+ Performance counter stats for 'system wide':
+
+            190.48 Joules power/energy-cores/                                         
+
+       7.643492335 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 7512 ms
+
+ Performance counter stats for 'system wide':
+
+            189.79 Joules power/energy-cores/                                         
+
+       7.635345291 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 7510 ms
+
+ Performance counter stats for 'system wide':
+
+            189.91 Joules power/energy-cores/                                         
+
+       7.644996660 seconds time elapsed
+
+#####################
+=== mode: taro_callback_taskflow
+#threads: 4, #streams: 4
+Construction time: 1 ms
+Execution time: 10645 ms
+
+ Performance counter stats for 'system wide':
+
+            185.47 Joules power/energy-cores/                                         
+
+      10.793017572 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 10625 ms
+
+ Performance counter stats for 'system wide':
+
+            177.67 Joules power/energy-cores/                                         
+
+      10.770160789 seconds time elapsed
+
+Construction time: 1 ms
+Execution time: 10648 ms
+
+ Performance counter stats for 'system wide':
+
+            176.20 Joules power/energy-cores/                                         
+
+      10.777960267 seconds time elapsed
+
+#####################
