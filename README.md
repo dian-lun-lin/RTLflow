@@ -20,9 +20,11 @@ RTLflow is a GPU acceleration flow for RTL simulation with batch stimulus. RTLfl
  To use RTLflow, you need:
  * Nvidia CUDA Toolkit and Compiler ([nvcc](https://developer.nvidia.com/cuda-llvm-compiler)) at least v11.0 with -std=c++17.
  * GNU C++ Compiler at least v5.0 with -std=c++17.
+ * libfl-dev
 ```bash
 ~$ nvcc --version    # NVCC must present with version at least v11.0
 ~$ g++ --version     # GNU must present with version at least v8.0
+~$ sudo apt install libfl-dev
 ```
 
 You will also need to set ```$VERILATOR_ROOT``` to RTLflow root directory before using RTLflow. For example:
